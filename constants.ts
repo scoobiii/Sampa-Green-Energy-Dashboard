@@ -1,4 +1,3 @@
-
 export const solarSizeData = `"kw de tamanho","contagem"
 "0 — 5","23354"
 "5 — 10","25576"
@@ -81,7 +80,7 @@ export const transportData = `"modo","sentido da viagem","viagens","distância t
 "MOTOCICLETA","TOTAL","392567","17633940","8816970","3319,3298","1659,6649","2018"
 "ÔNIBUS","DENTRO DA FRONTEIRA","5321357","44322210","44322210","33690,2799","33690,2799","2023"
 "ÔNIBUS","DENTRO DA FRONTEIRA","4740683","40952321","40952321","31128,7536","31128,7536","2022"
-"ÔNIBUS","DENTRO DA FRONTEIRA","4039380","35739013","35739013","27166,0044","27166,0044","2021"
+"ÔNIBUS","DENTRO DA FRONTEira","4039380","35739013","35739013","27166,0044","27166,0044","2021"
 "ÔNIBUS","DENTRO DA FRONTEIRA","4602480","39263702","39263702","29845,1974","29845,1974","2020"
 "ÔNIBUS","DENTRO DA FRONTEIRA","4885180","43537953","43537953","33094,149","33094,149","2019"
 "ÔNIBUS","DENTRO DA FRONTEIRA","3686534","33128869","33128869","25181,9769","25181,9769","2018"
@@ -99,3 +98,100 @@ export const buildingSectorData = `"setor","edifícios","toneladas de CO2e","con
 "ESCRITÓRIO","4459","397000","212,3358","4298000","0,0005","0,7751","0,0002","0,1124","0,0003","0,1124","0,0002","0"
 "VAREJO","2792","215000","145,8584","3696000","0,0005","0,6342","0,0002","0,1829","0,0003","0,1829","0,0002","0"
 "DEPÓSITO","219","6000","72,8669","205000","0,0005","0,6057","0,0002","0,1971","0,0003","0,1971","0,0002","0"`;
+
+export const projetoDeLei = `PROJETO DE LEI Nº ___/2025 – “SAMPA COP30”
+
+Autoria: Vereadora Marina Bragante
+Destinatário: Poder Executivo Municipal de São Paulo
+
+Ementa
+
+Institui a Política Municipal de Direito à Produção Máxima de Energia Solar nos imóveis públicos e privados, autoriza a criação do criptoativo “SAMPA” lastreado em energia elétrica (kWh), dispõe sobre financiamento e tokenização da produção solar pública e privada, e estabelece diretrizes de compensação térmica sustentável no âmbito da transição energética municipal e da COP30.
+
+TÍTULO I — DOS PRINCÍPIOS E DIREITOS
+
+Art. 1º Fica instituído, no Município de São Paulo, o Direito à Produção Máxima de Energia Solar, assegurando a todos os imóveis públicos, privados e de uso misto o direito e o dever de produzir energia renovável em sua capacidade máxima tecnicamente viável.
+
+Art. 2º A Política Municipal de que trata esta Lei tem como princípios:
+I – a soberania energética municipal baseada em fontes limpas;
+II – a integração entre energia, clima e desenvolvimento urbano sustentável;
+III – a participação prioritária de órgãos públicos como agentes exemplares de transição energética;
+IV – a promoção de inclusão social e energética por meio da tokenização da produção solar.
+
+Art. 3º O direito à produção máxima de energia solar compreende o aproveitamento integral das superfícies disponíveis – coberturas, fachadas, estacionamentos, terrenos e áreas subutilizadas – para geração elétrica e térmica, observadas as condições técnicas e urbanísticas.
+
+TÍTULO II — DA PARTICIPAÇÃO DOS ÓRGÃOS PÚBLICOS
+
+Art. 4º Todos os órgãos da administração pública direta e indireta, autarquias, fundações, empresas públicas, sociedades de economia mista, escolas, universidades, hospitais e unidades de segurança e transporte do Município de São Paulo deverão instalar sistemas de microgeração e minigeração solar até 2030, conforme cronograma fixado em decreto.
+
+Art. 5º Os edifícios públicos deverão priorizar:
+I – a instalação de painéis fotovoltaicos e térmicos;
+II – o uso de telhados, fachadas e áreas de estacionamento como plataformas de geração;
+III – a injeção dos excedentes energéticos na rede municipal e sua conversão em criptoativos SAMPA;
+IV – a destinação de parte desses créditos energéticos para escolas, creches, hospitais e habitações de interesse social.
+
+Art. 6º O Poder Executivo poderá celebrar convênios com órgãos estaduais e federais, localizados no território municipal, para integração de suas unidades ao sistema de tokenização e compensação energética previsto nesta Lei.
+
+Art. 7º A Prefeitura instituirá o Programa “Prédio Solar Público”, que priorizará a conversão de prédios administrativos, unidades de ensino e saúde em geradores certificados de energia solar e térmica.
+
+TÍTULO III — DA TOKENIZAÇÃO E DO CRIPTOATIVO “SAMPA”
+
+Art. 8º Fica instituído o criptoativo SAMPA, representativo de 1 (um) quilowatt-hora (kWh) de energia solar ou térmica efetivamente produzida e injetada no sistema de compensação energética municipal.
+
+Art. 9º O SAMPA será:
+I – lastreado em energia certificada por medidores homologados pela ANEEL e auditada por entidade independente;
+II – emitido por plataforma pública municipal sob governança descentralizada;
+III – utilizado para compensação energética, financiamento de novas instalações e transações em programas de sustentabilidade e créditos de carbono.
+
+Art. 10º Os órgãos públicos municipais terão prioridade na emissão e na utilização dos tokens SAMPA, podendo:
+I – trocar excedentes energéticos entre si;
+II – vender excedentes para empresas privadas mediante pregão energético público;
+III – destinar parte dos tokens à redução de custos operacionais de iluminação, refrigeração e data centers públicos.
+
+TÍTULO IV — DO FINANCIAMENTO ENERGÉTICO
+
+Art. 11º Fica criado o Fundo SAMPA COP30 de Energia Solar e Sustentabilidade, com objetivo de financiar projetos públicos e privados de geração distribuída, com juros nominais inferiores a 0,5% ao mês e prazo de amortização compatível com o ciclo imobiliário (até 30 anos).
+
+Art. 12º O Fundo poderá receber recursos de:
+I – compensação de créditos energéticos públicos e privados;
+II – emissão de títulos verdes (green bonds) e SAMPA-tokens;
+III – fundos municipais FEMA e FUNDURB;
+IV – recursos provenientes de programas estaduais e federais de eficiência energética;
+V – doações climáticas internacionais e fundos de carbono.
+
+Art. 13º As parcelas financiadas poderão ser quitadas com a entrega de tokens SAMPA, equivalentes à energia gerada pelo empreendimento financiado.
+
+TÍTULO V — DA COMPENSAÇÃO TÉRMICA E TRIGERAÇÃO
+
+Art. 14º Para compensar o sono solar (ausência noturna ou sazonal de insolação), o Município integrará sistemas de trigeração térmica movidos a biocombustíveis e biogás, priorizando plantas localizadas junto a unidades públicas com alta demanda energética (hospitais, data centers, e transporte público).
+
+Art. 15º O calor residual proveniente das termoelétricas municipais será aproveitado em:
+I – sistemas de refrigeração por absorção (frio gerado a partir do calor);
+II – data clouds e servidores municipais;
+III – sistemas de climatização distrital em áreas urbanas de alta densidade.
+
+TÍTULO VI — DAS METAS DE DESPOLUIÇÃO E ENERGIAS LIMPAS
+
+Art. 16º O Programa SAMPA COP30 visa reduzir as emissões de CO₂e do setor de edificações conforme as seguintes metas para 2030:
+
+Setor / Categoria	Redução Meta CO₂e
+Órgãos públicos municipais	75%
+Residencial	60%
+Hospitalar	45%
+Hoteleiro	50%
+Escritórios	70%
+Varejo	65%
+Depósitos	55%
+TÍTULO VII — DISPOSIÇÕES FINAIS
+
+Art. 17º O Poder Executivo regulamentará esta Lei em até 180 dias, instituindo:
+I – o Cadastro Municipal de Produção Solar Pública e Privada;
+II – o Sistema de Certificação e Tokenização SAMPA;
+III – o Conselho Gestor SAMPA COP30, com representação paritária de órgãos públicos, universidades e sociedade civil.
+
+Art. 18º Esta Lei entra em vigor na data de sua publicação.
+
+📘 Justificativa Técnica:
+A presente proposição fortalece a Política Municipal de Energia Solar (PL 107/2019) e o Marco Legal da Microgeração (Lei 14.300/2022), elevando São Paulo à condição de capital latino-americana da transição energética urbana.
+A inclusão dos órgãos públicos como produtores obrigatórios e exemplares garante capilaridade, transparência e retorno econômico direto à cidade.
+O criptoativo SAMPA (kWh) integra inovação tecnológica, sustentabilidade e finanças verdes, viabilizando tokenização, financiamento de longo prazo e descarbonização do setor público até 2030.`;

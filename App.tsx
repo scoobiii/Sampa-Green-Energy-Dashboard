@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line } from 'recharts';
-import { solarSizeData, solarOrientationData, carbonOffsetData, transportData, buildingSectorData } from './constants';
+import { solarSizeData, solarOrientationData, carbonOffsetData, transportData, buildingSectorData, projetoDeLei } from './constants';
 import type { SolarSize, SolarOrientation, CarbonOffset, Transport, BuildingSector, EnergySource } from './types';
 import { Card, KpiCard } from './components/Card';
 
@@ -76,7 +76,8 @@ const TransportationEmissionsChart: React.FC<{ data: Transport[] }> = ({ data })
             acc[year][curr.modo] = curr['total de CO2e em toneladas'];
             return acc;
         }, {} as Record<string, { ano: number; [key: string]: number }>);
-        return Object.values(grouped).sort((a, b) => a.ano - b.ano);
+        // FIX: Explicitly type sort function parameters to resolve TypeScript inference issue.
+        return Object.values(grouped).sort((a: { ano: number }, b: { ano: number }) => a.ano - b.ano);
     }, [data]);
 
     const modes = [...new Set(data.map(d => d.modo))].filter(m => m !== 'TOTAL');
@@ -153,10 +154,52 @@ const EnergyMixChart: React.FC<{ data: EnergySource[] }> = ({ data }) => {
     );
 };
 
+// --- Modal Component ---
+const ProjetoDeLeiModal: React.FC<{ isOpen: boolean; onClose: () => void; content: string }> = ({ isOpen, onClose, content }) => {
+    if (!isOpen) return null;
+
+    const formatContent = (text: string) => {
+        return text.split('\n').map((line, index) => {
+            if (line.startsWith('TÍTULO')) {
+                return <h2 key={index} className="text-xl font-bold mt-4 mb-2 text-secondary">{line}</h2>;
+            }
+            if (line.startsWith('Art.')) {
+                return <h3 key={index} className="text-lg font-semibold mt-3 text-primary">{line}</h3>;
+            }
+            if (line.startsWith('📘')) {
+                return <h3 key={index} className="text-lg font-bold mt-6 mb-2 text-accent">{line}</h3>;
+            }
+            if (line.trim() === '') {
+                return <br key={index} />;
+            }
+            return <p key={index} className="mb-2 text-gray-300">{line}</p>;
+        });
+    };
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50 p-4" onClick={onClose}>
+            <div className="bg-base-200 rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col" onClick={(e) => e.stopPropagation()}>
+                <div className="flex justify-between items-center p-4 border-b border-base-300">
+                    <h2 className="text-2xl font-bold text-white">Projeto de Lei “SAMPA COP30”</h2>
+                    <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div className="p-6 overflow-y-auto">
+                    {formatContent(content)}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 
 // --- Main App Component ---
 
 export default function App() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const parsedSolarSize = useMemo(() => parseCsv(solarSizeData, (row) => ({ 'kw de tamanho': row[0], 'contagem': parseInt(row[1]) })), []);
     const parsedSolarOrientation = useMemo(() => parseCsv(solarOrientationData, (row) => ({ 'orientação': row[0], 'número de painéis': parseInt(row[1]), 'kwh de luz solar por ano': parseInt(row[2]) })), []);
     const parsedCarbonOffset = useMemo(() => parseCsv(carbonOffsetData, (row) => ({ 'toneladas métricas de compensação de carbono': parseNumber(row[0]), 'quantidade qualificada': parseNumber(row[1]), 'total de kw': parseNumber(row[3]) }))[0], []);
@@ -264,15 +307,31 @@ export default function App() {
                     </div>
                 </div>
             </section>
+            
+            <section className="mb-8 max-w-7xl mx-auto">
+                 <div className="bg-base-200 rounded-lg p-6 shadow-lg border border-primary/30 text-center">
+                    <h2 className="text-2xl font-bold text-primary mb-3">Conectando Dados à Ação: O Projeto de Lei "SAMPA COP30"</h2>
+                    <p className="text-gray-400 mb-4 max-w-4xl mx-auto">
+                        Este dashboard fornece os dados que fundamentam o Projeto de Lei "SAMPA COP30", que visa transformar São Paulo em um líder de energia renovável, instituindo o direito à produção solar e criando o criptoativo SAMPA para financiar a transição.
+                    </p>
+                    <button
+                        onClick={() => setIsModalOpen(true)}
+                        className="bg-primary hover:bg-green-500 text-white font-bold py-2 px-4 rounded-lg transition-colors shadow-md"
+                    >
+                        Leia o Projeto de Lei na Íntegra
+                    </button>
+                </div>
+            </section>
+
 
             <main>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                     <KpiCard title="Potência Solar Total" value={`${(kpiData.totalKw / 1e6).toFixed(2)}M`} unit="kW" description="Potência instalada total dos painéis qualificados." />
                     <KpiCard title="Potencial Solar Anual" value={kpiData.solarPotentialTwh.toFixed(2)} unit="TWh/ano" description="Potencial de geração anual com base nos painéis existentes." />
+                    <KpiCard title="Energia Térmica (Etanol)" value={kpiData.pedreiraThermalGenerationTwh.toFixed(2)} unit="TWh/ano" description="Geração do Parque Térmico Pedreira (estimado)." />
                     <KpiCard title="Receita Solar Anual" value={kpiData.formatBillion(kpiData.annualRevenue)} unit="/ano" description="Receita estimada com base no preço de R$0,70/kWh." />
                     <KpiCard title="Compensação de Carbono" value={`${(parsedCarbonOffset['toneladas métricas de compensação de carbono'] / 1e6).toFixed(2)}M`} unit="toneladas" description="Total de CO2e compensado por instalações solares." />
                     <KpiCard title="Instalações Qualificadas" value={parsedCarbonOffset['quantidade qualificada'].toLocaleString('pt-BR')} unit="instalações" description="Número de projetos de energia solar contribuindo." />
-                    <KpiCard title="Energia Térmica (Etanol)" value={kpiData.pedreiraThermalGenerationTwh.toFixed(2)} unit="TWh/ano" description="Geração do Parque Térmico Pedreira (estimado)." />
                     <KpiCard title="CAPEX Estimado" value={kpiData.formatBillion(kpiData.capex)} unit="" description="Estimativa do CAPEX com base no custo médio de R$3,33/Wp." />
                     <KpiCard title="OPEX Anual Estimado" value={kpiData.formatMillion(kpiData.opex)} unit="/ano" description="Estimativa de custo operacional anual (~1.5% do CAPEX)." />
                     <KpiCard title="ROI Anual Estimado" value={`${kpiData.roi.toFixed(1)}`} unit="% a.a." description="Retorno sobre o Investimento baseado no preço de R$0,70/kWh." />
@@ -300,6 +359,7 @@ export default function App() {
                 <p className="text-sm text-gray-400">Um projeto conceitual por entusiastas da tecnologia em solidariedade.</p>
                 <p className="text-xs text-gray-500 mt-2">© 2025 mex energia. mex.eco.br. todos os direitos reservados.</p>
             </footer>
+            <ProjetoDeLeiModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} content={projetoDeLei} />
         </div>
     );
 }
